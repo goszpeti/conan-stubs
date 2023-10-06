@@ -1,4 +1,8 @@
-# Conan-stubs
+# Conan-stubs: Type stubs for Conan
+![https://pypi.org/project/conan-stubs/](https://img.shields.io/pypi/v/conan-stubs)
+![PyPI Python versions](https://img.shields.io/pypi/pyversions/conan-stubs)
+![Downloads](https://img.shields.io/pypi/dm/conan-stubs)
+
 Type stubs for specific conan versions for authoring Conanfiles.
 Versions of this package will correspond to the corresponding conan minor version.
 
@@ -15,29 +19,28 @@ Versions of this package will correspond to the corresponding conan minor versio
 ### Details
 
 Methods which also can be used as class variables can not be annotated directly:
-`
+```
 ...
-    tool_requires = "cmake/3.25.3"
-    def build_requirements(self):
-        self.tool_requires("cmake/3.25.3")
-`
+tool_requires = "cmake/3.25.3"
+def build_requirements(self):
+    self.tool_requires("cmake/3.25.3")
+```
 
 The annotation would look like this with a property + method, but can not interpreted:
-`
-    @property
-    @overload
-    def tool_requires(self) -> None: ...
-    @overload
-    def tool_requires(self, requirement: str, force_host_context: bool=False) -> None: ...
-    @tool_requires.setter
-    def tool_requires(self, value: Optional[Iterable[str]]): ...
-`
-
+```
+@property
+@overload
+def tool_requires(self) -> None: ...
+@overload
+def tool_requires(self, requirement: str, force_host_context: bool=False) -> None: ...
+@tool_requires.setter
+def tool_requires(self, value: Optional[Iterable[str]]): ...
+```
 
 ## Supported conan versions:
   * 1.59.0
 
 ## Supported Python versions:
-  * >=3.8
+  * minimum 3.8
 
 
