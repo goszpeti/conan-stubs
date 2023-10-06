@@ -16,7 +16,7 @@ from conans.model.user_info import DepsUserInfo, UserInfo
 from conan.tools.env import Environment
 from pathlib import Path
 
-from typing import Any, Dict, Iterable, List, Literal, Optional, Tuple, TypedDict, Union
+from typing import Any, Dict, Iterable, List, Literal, Optional, Tuple, TypeAlias, TypedDict, Union
 
 def create_options(conanfile): ...
 def create_requirements(conanfile): ...
@@ -36,6 +36,11 @@ class ConanSCM(TypedDict, total=False):
   shallow: bool # shallow clone for git
   submodule: Literal["shallow", "recursive"]
 
+generators: TypeAlias =  Literal["cmake", "cmake_multi", "cmake_paths", "cmake_find_package", "cmake_find_package_multi", "msbuild",
+                        "visual_studio", "visual_studio_multi", "visual_studio_legacy", "xcode", "compiler_args", "gcc",
+                        "boost-build", "b2", "qbs", "qmake", "scons", "pkg_config", "virtualenv", "virtualenv_python",
+                        "virtualbuildenv", "virtualrunenv", "youcompleteme", "txt", "json", "premake", "make", "markdown", "deploy"]
+
 class ConanFile:
     name: str 
     version: str
@@ -51,10 +56,7 @@ class ConanFile:
     apply_env: bool # When True (Default), the values from self.deps_env_info (corresponding to the declared env_info in the requires and tool_requires) will be automatically applied to the os.environ.
     exports: Union[str, Tuple[str]]
     exports_sources: Union[str, Iterable[str]]
-    generators: Iterable[Literal["cmake", "cmake_multi", "cmake_paths", "cmake_find_package", "cmake_find_package_multi", "msbuild",
-                        "visual_studio", "visual_studio_multi", "visual_studio_legacy", "xcode", "compiler_args", "gcc",
-                        "boost-build", "b2", "qbs", "qmake", "scons", "pkg_config", "virtualenv", "virtualenv_python",
-                        "virtualbuildenv", "virtualrunenv", "youcompleteme", "txt", "json", "premake", "make", "markdown", "deploy"]]
+    generators: Union[generators, Iterable[generators]]
     revision_mode: Literal["hash", "scm"]
     should_configure: bool
     should_build: bool

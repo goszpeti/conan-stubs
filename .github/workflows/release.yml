@@ -32,10 +32,13 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         stubgen -p conans --include-private
+        stubgen -p conan --include-private
         mkdir ./gen
         mkdir ./gen/conan-stubs
-        cp -r ./out/conans ./gen/conan-stubs
-        cp -rf ./src/conan-stubs ./gen/
+        mkdir ./gen/conans-stubs
+        cp -r ./out/conan/* ./gen/conan-stubs
+        cp -r ./out/conans/* ./gen/conans-stubs
+        cp -rf ./src/conans-stubs/* ./gen/conans-stubs
         python3 -m build
-        python3 -m twine upload --repository testpypi dist/*
+        python3 -m twine upload dist/*
 

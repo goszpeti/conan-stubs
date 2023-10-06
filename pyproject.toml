@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "conan-stubs"
 authors = [{name = "Peter Gosztolya"}]
-version = "1.59.0a0"
+version = "1.59.0a2"
 requires-python = ">=3.8"
 description = "Conan type stubs"
 readme = "README.md"
@@ -19,7 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 [tool.setuptools]
-packages = ["conan-stubs"]
+packages = ["conans-stubs", "conan-stubs"]
 
 [tool.setuptools.package-data]
 "*" = ["**/*.pyi"]
