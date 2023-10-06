@@ -20,15 +20,19 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.8'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine
+        pip install setuptools wheel twine mypy build
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        stubgen -p conans --include-private
+        cp -r ./out/conans ./build/conan-stubs
+        cp -rf ./src/conan-stubs ./build/
+        python3 -m build
+        python3 -m twine upload --repository testpypi dist/*
+

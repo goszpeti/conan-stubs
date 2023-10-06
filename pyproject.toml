@@ -21,3 +21,8 @@ classifiers = [
 [tool.setuptools]
 packages = ["conan-stubs"]
 
+[tool.setuptools.package-data]
+"*" = ["**/*.pyi"]
+
+[tool.setuptools.package-dir]
+"" = "build"
