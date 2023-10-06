@@ -25,4 +25,4 @@ packages = ["conan-stubs"]
 "*" = ["**/*.pyi"]
 
 [tool.setuptools.package-dir]
-"" = "build"
+"" = "gen"
