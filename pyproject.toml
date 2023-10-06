@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "conan-stubs"
 authors = [{name = "Peter Gosztolya"}]
-version = "1.59.0"
+version = "1.59.0a0"
 requires-python = ">=3.8"
 description = "Conan type stubs"
 readme = "README.md"
