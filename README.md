@@ -26,7 +26,7 @@ def build_requirements(self):
     self.tool_requires("cmake/3.25.3")
 ```
 
-The annotation would look like this with a property + method, but can not interpreted:
+The annotation would look like this with a property plus method, but can not be interpreted:
 ```
 @property
 @overload
