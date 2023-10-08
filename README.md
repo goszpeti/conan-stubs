@@ -8,7 +8,13 @@ Versions of this package will correspond to the corresponding conan minor versio
 
 * Generated with mypy via `stubgen -p conans --include-private` to fill up package, so everything resolves
 * model.conan_file is handcrafted and functions are documented with basic descriptions
-* Selectable string values are annotated (e.g. all generators) and scm attribute is fully typehinted as typeddcit
+* Selectable string values are annotated (e.g. all generators) and scm attribute is fully type hinted as TypedDict
+
+## Why use type stubs instead of the bundled pylint plugin?
+
+* Only usable with pylint, which is very unperformant and newer tools as Ruff can not work with this
+* Methods are still missing (e.g. tool_requires)
+* No autocomplete from pylint
 
 ## Limitations
 
@@ -38,7 +44,7 @@ def tool_requires(self, value: Optional[Iterable[str]]): ...
 ```
 
 ## Supported conan versions:
-  * 1.59.0
+  * 1.59
 
 ## Supported Python versions:
   * minimum 3.8
