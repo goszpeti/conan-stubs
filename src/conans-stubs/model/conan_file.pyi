@@ -13,6 +13,8 @@ from conans.model.requires import Requirements as Requirements
 from conans.model.ref import ConanFileReference
 from conans.model.settings import Settings
 from conans.model.user_info import DepsUserInfo, UserInfo
+from conans.model.info import ConanInfo
+
 from conan.tools.env import Environment
 from pathlib import Path
 
@@ -88,6 +90,7 @@ class ConanFile:
     virtualrunenv: bool
     python_requires: Union[str, Iterable[str]]
     python_requires_extend: Union[str, Iterable[str]]
+    info: ConanInfo # package_id info object
 
     conan_data = Dict[str, str] # dict read from conandata.yml
     test_type: Literal["requires", "build_requires", "explicit"]
@@ -114,6 +117,10 @@ class ConanFile:
     def runenv(self) -> Environment: """ Package-specific runtime Environment """
     @property
     def new_cpp_info(self) -> NewCppInfo: """TODO: ? """
+    @property
+    def recipe_folder(self)-> str: ...
+    @property
+    def recipe_path(self) -> Path:  """ Recipe folder as path """
     @property
     def source_folder(self): """ The folder in which the source code lives. """
     @property

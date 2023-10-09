@@ -8,7 +8,7 @@ Versions of this package will correspond to the corresponding conan minor versio
 
 * Generated with mypy via `stubgen -p conans --include-private` to fill up package, so everything resolves
 * model.conan_file is handcrafted and functions are documented with basic descriptions
-* Selectable string values are annotated (e.g. all generators) and scm attribute is fully type hinted as TypedDict
+* Selectable string values are annotated and scm attribute is fully type hinted as TypedDict
 
 ## Why use type stubs instead of the bundled pylint plugin?
 
