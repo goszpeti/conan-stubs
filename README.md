@@ -21,6 +21,7 @@ Versions of this package will correspond to the corresponding conan minor versio
 * tool_requires, build_requires, requires are annotated with only their function signature
 * settings are annotated by their setter information for the class variable
 * Every annotation is in the file, but commented out
+* See https://github.com/python/mypy/issues/3004 and https://github.com/microsoft/pylance-release/issues/1735
 
 ### Details
 

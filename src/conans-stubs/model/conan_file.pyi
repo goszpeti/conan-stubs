@@ -2,6 +2,7 @@
 
 from _typeshed import Incomplete
 from collections.abc import Generator
+from conans.client.graph.python_requires import PyRequire
 from conans.client.output import ScopedOutput
 from conans.model.build_info import DepsCppInfo, CppInfo
 from conans.model.conf import Conf as Conf
@@ -18,7 +19,8 @@ from conans.model.info import ConanInfo
 from conan.tools.env import Environment
 from pathlib import Path
 
-from typing import Any, Dict, Iterable, List, Literal, Optional, Tuple, TypeAlias, TypedDict, Union
+from typing import Any, Callable, Dict, Iterable, List, Literal, \
+        Optional, Tuple, TypeAlias, TypedDict, Union
 
 def create_options(conanfile): ...
 def create_requirements(conanfile): ...
@@ -45,13 +47,13 @@ class ConanFile:
     license: str
     author: str
     description: str
-    topics: Tuple[str]
+    topics: Iterable[str] # TODO 
     homepage: str
     build_policy: Literal["missing", "always"]
     upload_policy: Optional[Literal["skip"]]
     short_paths: bool
     apply_env: bool # When True (Default), the values from self.deps_env_info (corresponding to the declared env_info in the requires and tool_requires) will be automatically applied to the os.environ.
-    exports: Union[str, Tuple[str]]
+    exports: Union[str, Iterable[str]]
     exports_sources: Union[str, Iterable[str]]
     generators: Union[str, Iterable[str]]
     revision_mode: Literal["hash", "scm"]
@@ -88,15 +90,19 @@ class ConanFile:
     deps_user_info: DepsUserInfo
     virtualbuildenv: bool
     virtualrunenv: bool
-    python_requires: Union[str, Iterable[str]]
     python_requires_extend: Union[str, Iterable[str]]
     info: ConanInfo # package_id info object
 
-    conan_data = Dict[str, str] # dict read from conandata.yml
+    conan_data = Dict[str, Any] # dict read from conandata.yml
     test_type: Literal["requires", "build_requires", "explicit"]
     no_copy_source: bool  # Tells the recipe that the source code will not be copied from the source folder to the build folder.
     scm: ConanSCM  # Used to clone/checkout a repository
     # methods
+    python_requires: Union[str, Iterable[str]]
+    # @property
+    # def python_requires(self) -> Dict[str, PyRequire]: ...
+    # @python_requires.setter
+    # def python_requires(self, value: Union[str, Iterable[str]]): ...
     @property
     def build_policy_missing(self): """ Sets build_policy to missing" """
     @property
@@ -165,7 +171,10 @@ class ConanFile:
     # def settings(self) -> Settings: ...
     # @settings.setter
     # def settings(self, value: Optional[Iterable[str]]) -> None: ...
-    settings: Optional[Iterable[Literal["os", "compiler", "build_type", "arch"]]]
+    settings: Optional[Union[Literal["os", "compiler", "build_type", "arch"], 
+                             Iterable[Literal["os", "compiler", "build_type", "arch"]]],
+                            #  Dict[str, Settings]
+                             ]
 
 
     # combined requirements methods and attributes
